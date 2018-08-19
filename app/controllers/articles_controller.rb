@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-
+    @articles = Article.all.order(created_at: :desc) #w nawiasie nazwa kolumny czyli klucz a następnie podajemy wartość czyli to desc 
   end
 
   def new
