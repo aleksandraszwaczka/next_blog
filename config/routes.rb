@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   #jeśli wpiszesz po adresie głównym w przeglądarce 'articles' to on przejdzie do 'articles#index'
   get 'articles/new', to: 'articles#new', as: 'new_article'
   #as: zmienia nazwę prefixu
+get 'articles/:id', to: 'articles#show', as: "article"
+# :id , po dwukropku to jest parametr
+
   post 'articles', to: 'articles#create'
   #get czyta dane (tylko odczytuje)
   #post tworzy nowe zasoby
