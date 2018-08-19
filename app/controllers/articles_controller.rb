@@ -32,7 +32,9 @@ class ArticlesController < ApplicationController
 # .permit definiuje dopuszczalne parametry do wywołania, to chroni np hasła
   end
 
-  def show; end
+  def show
+    @comment = Comment.new(article: @article)
+  end
 
   def edit; end
 

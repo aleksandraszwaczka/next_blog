@@ -5,5 +5,5 @@ class Article < ApplicationRecord
   validates :text, presence: true, length: { maximum: 250 }
   # validacje, nazwa pola (kolumny) i wszystkie kryteria i tak dla kazdej
   # kolumny
-  validates_uniqueness_of :title, :text
+  has_many :comments
 end
