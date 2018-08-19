@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   #as: zmienia nazwę prefixu
 get 'articles/:id', to: 'articles#show', as: "article"
 # :id , po dwukropku to jest parametr
+  get 'articles/:id/edit', to: 'articles#edit', as: 'edit_article'
+
+  patch 'articles/:id', to: 'articles#update'
+  #nie zdefiniowany put w edicie
 
   post 'articles', to: 'articles#create'
   #get czyta dane (tylko odczytuje)
