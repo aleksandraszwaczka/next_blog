@@ -1,19 +1,24 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all.order(created_at: :desc) #w nawiasie nazwa kolumny czyli klucz a następnie podajemy wartość czyli to desc 
+    @articles = Article.all.order(created_at: :desc) #w nawiasie nazwa kolumny czyli klucz a następnie podajemy wartość czyli to desc
   end
 
   def new
-
+    @article = Article.new
   end
 
   def create
     articles_params = params.require(:article).permit(:title, :text)
 
     @article = Article.new(articles_params)
-    @article.save
 
-    redirect_to @article
+    if @article.save
+      redirect_to @article
+    else
+      render 'new'
+    end
+
+
     #tu my mu podajemy dokładny obiekt, któremu on sam nadaje id
     #ścieżki do tego gdzie przekierować szukamy za pomocą komendy bin/rails router w konsoli
     #jeśli podajemy obiekt czyli @article, @book itd, przekierowuje nas zawsze do akcji show
