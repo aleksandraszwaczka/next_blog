@@ -11,6 +11,7 @@ get 'articles/:id', to: 'articles#show', as: "article"
 
   patch 'articles/:id', to: 'articles#update'
   #nie zdefiniowany put w edicie
+  delete 'articles/:id', to: 'articles#destroy'
 
   post 'articles', to: 'articles#create'
   #get czyta dane (tylko odczytuje)
