@@ -2,9 +2,13 @@ class CommentsController < ApplicationController
 before_action :provide_article, only: %i[create destroy]
 
   def create
-    @comment = @article.comments.create(comment_params)
+    @comment = Comment.new(comment_params)
 
-    redirect_to @article
+    if @comment.save
+      redirect_to @article
+    else
+      render 'articles/show'
+    end
   end
 
 def destroy
@@ -22,6 +26,6 @@ end
   end
 
   def comment_params
-    params.require(:comment).permit(:commenter, :body)
+    params.require(:comment).permit(:commenter, :body).merge(article: @article)
   end
 end
