@@ -5,5 +5,5 @@ class Article < ApplicationRecord
   validates :text, presence: true, length: { maximum: 250 }
   # validacje, nazwa pola (kolumny) i wszystkie kryteria i tak dla kazdej
   # kolumny
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end
