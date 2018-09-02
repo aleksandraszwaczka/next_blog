@@ -1,22 +1,35 @@
 <h2>Listing articles</h2>
 
-<p><%= link_to "New article", new_article_path %></p>
+<p><%= link_to "New article", new_article_path, class: 'btn btn-dark' %></p>
 
-<table>
+<table class='table table-hover'>
+  <thead class='thead-dark'>
   <tr>
     <th>Id</th>
     <th>Title</th>
     <th>Actions</th>
   </tr>
+</thead>
   <% @articles.each do |article| %>
+<tbody>
     <tr>
       <td><%= article.id %></td>
       <td><%= article.title %></td>
       <td>
-        <%= link_to 'Show', article_path(article), class: 'btn btn-success' %> |
-        <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-primary' %> |
-        <%= link_to 'Delete', article_path(article), method: :delete, class: 'btn btn-danger' %>
+        <%= link_to article_path(article), class: 'btn btn-success' do %>
+          <%= fa_icon "search" %>
+          Show
+          <% end %>
+        <%= link_to edit_article_path(article), class: 'btn btn-primary' do %>
+          <%= fa_icon "edit" %>
+          Edit
+        <% end %>
+        <%= link_to article_path(article), method: :delete, class: 'btn btn-danger' do %>
+          <%= fa_icon "trash" %>
+          Delete
+        <% end %>
       </td>
     </tr>
+  </tbody>
   <% end %>
 </table>
