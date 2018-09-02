@@ -6,4 +6,19 @@ class Article < ApplicationRecord
   # validacje, nazwa pola (kolumny) i wszystkie kryteria i tak dla kazdej
   # kolumny
   has_many :comments, dependent: :destroy
+
+  def tags=(obj)
+    if obj.is_a?(String)
+      super sanitize_tags(obj)
+    else
+      super
+    end
+  end
+
+private
+
+  def sanitize_tags(text)
+    text.split.map(&:downcase).uniq
+  end
+
 end
