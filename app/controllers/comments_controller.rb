@@ -5,6 +5,8 @@ before_action :provide_article, only: %i[create destroy]
     @comment = Comment.new(comment_params)
 
     if @comment.save
+      session[:commenter] = @comment.commenter
+      
       redirect_to @article
     else
       render 'articles/show'
