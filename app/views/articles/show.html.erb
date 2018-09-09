@@ -20,6 +20,10 @@
       <% end %>
       (<%= @article.likes.count %>)
     </p>
+    <% if @article.image.attached? %>
+    <p>
+      <%= image_tag url_for(@article.image), height: 200, width: 200 %>
+    </p>
   </div>
 </div>
 
