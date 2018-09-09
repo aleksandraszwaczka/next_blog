@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_09_080040) do
+ActiveRecord::Schema.define(version: 2018_09_09_094121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2018_09_09_080040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "tags", default: [], array: true
-    t.bigint 'user_id'
-    t.index ['user_id'], name: 'index_articles_on_user_id'
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 2018_09_09_080040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_likes_on_article_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,4 +61,6 @@ ActiveRecord::Schema.define(version: 2018_09_09_080040) do
   end
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "likes", "articles"
+  add_foreign_key "likes", "users"
 end

@@ -2,6 +2,7 @@
 
 class ArticlesController < ApplicationController
   before_action :provide_article, only: %i[show edit update destroy]
+  before_action :check_article_owner, only: %i[edit update]
 
   def index
     @articles = Article.all.order(created_at: :desc)
@@ -27,6 +28,7 @@ class ArticlesController < ApplicationController
 
   def show
     @comment = Comment.new(article: @article, commenter: session[:commenter])
+    @like = @article.likes.find_by(user: current_user)
   end
 
   def edit; end
@@ -46,6 +48,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def check_article_owner
+    redirect_to articles_path if @article.user != current_user
+  end
 
   def provide_article
     @article = Article.find(params[:id])

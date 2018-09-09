@@ -6,7 +6,7 @@ class Article < ApplicationRecord
   # validacje, nazwa pola (kolumny) i wszystkie kryteria i tak dla kazdej
   # kolumny
   has_many :comments, dependent: :destroy
-
+  has_many :likes, dependent: :destroy
   belongs_to :user
 
   def tags=(obj)
